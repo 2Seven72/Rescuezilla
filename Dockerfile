@@ -3,10 +3,11 @@
 
 # Note: the host system Ubuntu version (below) is defined separately from the version of the
 # generated Ubuntu image.
-ARG CODENAME=jammy
+# ARG CODENAME=jammy
+ARG CODENAME=kinetic
 FROM ubuntu:${CODENAME}
 # Define the Ubuntu code name again because Docker clears the argument after the FROM command.
-ARG CODENAME=jammy
+ARG CODENAME=kinetic
 
 # Copy the apt repository mirror list into the Docker image.
 # 
