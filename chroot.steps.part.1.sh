@@ -157,35 +157,11 @@ pkgs_specific_to_ubuntu2210_kinetic=(
 
 # Languages on the system
 lang_codes=(
-             "ar"
-             "ca"
-             "cs"
-             "da"
              "de"
-             "el"
              "es"
              "fr"
-             "ko"
-             "id"
              "it"
-             "he"
-             "lt"
-             "hu"
-             "nl"
-             "ja"
-             "nb"
-             "pl"
              "pt"
-             "ru"
-             "sk"
-             "sq"
-             "sv"
-             "th"
-             "tr"
-             "uk"
-             "vi"
-             "zh-hans"
-             "zh-hant"
 )
 
 # Prepare list of language packs to install
