@@ -1,7 +1,7 @@
 {
   "policies": {
     "Homepage": {
-      "URL": "https://patreon.com/join/rescuezilla",
+      "URL": "https://start.duckduckgo.com",
       "Additional": [ "https://rescuezilla.com/?v=VERSION-SUBSTITUTED-BY-BUILD-SCRIPT" ]
     },
     "DisableTelemetry": true, 
