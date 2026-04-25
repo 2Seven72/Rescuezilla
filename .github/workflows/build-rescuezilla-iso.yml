@@ -1,5 +1,6 @@
 # On push [1]
 # [1] https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+
 on: [push]
 jobs:
   rescuezilla-iso-build:
@@ -45,7 +46,7 @@ jobs:
 
       # - run: make docker-status
       # - name: Make Ubuntu 22.04 LTS (Jammy) ISO [LTS  = Long Term Support]
-      #  run: make docker-jammy
+        #  run: make docker-jammy
       # - run: sudo mv build/rescuezilla.amd64.jammy.iso build/rescuezilla-${{github.ref_name}}-64bit.jammy.iso
 
       # - run: make docker-status
@@ -66,32 +67,35 @@ jobs:
         if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
         with:
           files: |
-            build/*SUM
-            build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
             build/rescuezilla-${{github.ref_name}}-*.iso
+        # with:
+          # files: |
+            # build/*SUM
+            # build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
+            # build/rescuezilla-${{github.ref_name}}-*.iso
 
       # Upload GitHub Action workflow *artifacts*. Note "artifacts" are a different concept to GitHub release rssets. The former is available on each GitHub Actions
       # workflow run. The latter is associated with only a pushed tag.
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: SHA256SUM
-          path: build/SHA256SUM
+      # - uses: actions/upload-artifact@v4
+        # with:
+          # name: SHA256SUM
+          # path: build/SHA256SUM
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: MD5SUM
-          path: build/MD5SUM
+      # - uses: actions/upload-artifact@v4
+        # with:
+          # name: MD5SUM
+          # path: build/MD5SUM
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: SHA1SUM
-          path: build/SHA1SUM
+      # - uses: actions/upload-artifact@v4
+        # with:
+          # name: SHA1SUM
+          # path: build/SHA1SUM
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: rescuezilla_${{env.DEB_VERSION}}-1_all.deb
-          path: build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
+      # - uses: actions/upload-artifact@v4
+        # with:
+          # name: rescuezilla_${{env.DEB_VERSION}}-1_all.deb
+          # path: build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
 
       - uses: actions/upload-artifact@v4
         with:
