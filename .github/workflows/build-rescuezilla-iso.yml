@@ -43,6 +43,21 @@ jobs:
         run: make docker-kinetic
       - run: sudo mv build/rescuezilla.amd64.kinetic.iso build/rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
 
+      - run: make docker-status
+      - name: Make Ubuntu 22.04 LTS (Jammy) ISO [LTS  = Long Term Support]
+        run: make docker-jammy
+      - run: sudo mv build/rescuezilla.amd64.jammy.iso build/rescuezilla-${{github.ref_name}}-64bit.jammy.iso
+
+      - run: make docker-status
+      - name: Make Ubuntu 20.04 LTS (Focal) ISO [LTS  = Long Term Support]
+        run: make docker-focal
+      - run: sudo mv build/rescuezilla.amd64.focal.iso build/rescuezilla-${{github.ref_name}}-64bit.focal.iso
+
+      - run: make docker-status
+      - name: Make Ubuntu 18.04 LTS (Bionic) ISO (i386)
+        run: make docker-bionic-i386
+      - run: sudo mv build/rescuezilla.i386.bionic.iso build/rescuezilla-${{github.ref_name}}-32bit.bionic.iso
+
       - name: Create checksums for ISO images
         run: cd build && sudo ../src/scripts/create_iso_checksums.sh rescuezilla_${{env.DEB_VERSION}}-1_all.deb  rescuezilla-${{github.ref_name}}-*.iso
 
@@ -83,3 +98,17 @@ jobs:
           name: rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
           path: build/rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rescuezilla-${{github.ref_name}}-64bit.jammy.iso
+          path: build/rescuezilla-${{github.ref_name}}-64bit.jammy.iso
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rescuezilla-${{github.ref_name}}-64bit.focal.iso
+          path: build/rescuezilla-${{github.ref_name}}-64bit.focal.iso
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rescuezilla-${{github.ref_name}}-32bit.bionic.iso
+          path: build/rescuezilla-${{github.ref_name}}-32bit.bionic.iso
