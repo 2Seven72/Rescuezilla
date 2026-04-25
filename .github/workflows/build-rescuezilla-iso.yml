@@ -45,7 +45,7 @@ jobs:
 
       # - run: make docker-status
       # - name: Make Ubuntu 22.04 LTS (Jammy) ISO [LTS  = Long Term Support]
-        # run: make docker-jammy
+      #  run: make docker-jammy
       # - run: sudo mv build/rescuezilla.amd64.jammy.iso build/rescuezilla-${{github.ref_name}}-64bit.jammy.iso
 
       # - run: make docker-status
