@@ -712,7 +712,7 @@ msgstr "Sondando {device} com {app}"
 #, python-brace-format
 msgid "Growing filesystem {partition} ({filesystem}). This may take a while..."
 msgstr ""
-"Crescente sistema de arquivos {partição} ({filesystem}). Isso pode demorar "
+"Crescente sistema de arquivos {partition} ({filesystem}). Isso pode demorar "
 "um pouco..."
 
 #, python-brace-format
