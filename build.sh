@@ -74,12 +74,12 @@ if [ ! -d "$PKG_CACHE_DIRECTORY/$DEBOOTSTRAP_CACHE_DIRECTORY" ] ; then
     # Selecting a geographically closer APT mirror may increase network transfer rates.
     #
     # Note: After the support window for a specific release ends, the packages are moved to the 'old-releases' 
-    # URL [1], which means substitution becomes mandatory in-order to build older releases from scratch.
-    # https://archive.ubuntu.com/ubuntu
-    # [1] http://old-releases.ubuntu.com/ubuntu
+    # URL [2], which means substitution becomes mandatory in-order to build older releases from scratch.
+    # [1] https://archive.ubuntu.com/ubuntu
+    # [2] https://old-releases.ubuntu.com/ubuntu
     TARGET_FOLDER=`readlink -f $PKG_CACHE_DIRECTORY/$DEBOOTSTRAP_CACHE_DIRECTORY`
     pushd ${DEBOOTSTRAP_SCRIPT_DIRECTORY}
-    DEBOOTSTRAP_DIR=${DEBOOTSTRAP_SCRIPT_DIRECTORY} ./debootstrap --arch=$ARCH --foreign $CODENAME $TARGET_FOLDER http://old-releases.ubuntu.com/ubuntu/
+    DEBOOTSTRAP_DIR=${DEBOOTSTRAP_SCRIPT_DIRECTORY} ./debootstrap --arch=$ARCH --foreign $CODENAME $TARGET_FOLDER https://old-releases.ubuntu.com/ubuntu/
     RET=$?
     popd
     if [[ $RET -ne 0 ]]; then
