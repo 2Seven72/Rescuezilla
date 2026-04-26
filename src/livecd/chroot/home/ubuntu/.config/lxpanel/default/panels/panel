@@ -93,7 +93,6 @@ Plugin {
 Plugin {
   type=dclock
   Config {
-   # ClockFmt=%I:%M %p%n%a, %b %d %Y
     ClockFmt=%H:%M %n %d-%m-%Y
     TooltipFmt=%A %x
     BoldFont=0
