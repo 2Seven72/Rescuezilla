@@ -4,12 +4,12 @@
 # Note: the host system Ubuntu version (below) is defined separately from the version of the
 # generated Ubuntu image.
 
-ARG CODENAME=kinetic
-# ARG CODENAME=jammy
+# ARG CODENAME=kinetic
+ARG CODENAME=jammy
 FROM ubuntu:${CODENAME}
 # Define the Ubuntu code name again because Docker clears the argument after the FROM command.
-ARG CODENAME=kinetic
-# ARG CODENAME=jammy
+# ARG CODENAME=kinetic
+ARG CODENAME=jammy
 
 # Copy the apt repository mirror list into the Docker image.
 # 
@@ -21,8 +21,8 @@ ARG CODENAME=kinetic
 # in-order to build older releases from scratch.
 #
 RUN echo $CODENAME
-COPY src/livecd/chroot/etc/apt/sources.list /etc/apt/sources.list
-# COPY src/livecd/chroot/etc/apt/sources.docker.list /etc/apt/sources.list
+# COPY src/livecd/chroot/etc/apt/sources.list /etc/apt/sources.list
+COPY src/livecd/chroot/etc/apt/sources.docker.list /etc/apt/sources.list
 # Copy the apt-preferences file to ensure backports and proposed repositories are never automatically selected.
 COPY "src/livecd/chroot/etc/apt/preferences.d/89_CODENAME_SUBSTITUTE-backports_default" "/etc/apt/preferences.d/89_$CODENAME-backports_default"
 COPY "src/livecd/chroot/etc/apt/preferences.d/90_CODENAME_SUBSTITUTE-proposed_default" "/etc/apt/preferences.d/90_$CODENAME-proposed_default"
