@@ -189,7 +189,7 @@ APT_CONFIG_FILES=(
     "chroot/etc/apt/preferences.d/89_$CODENAME-backports_default"
     "chroot/etc/apt/preferences.d/90_$CODENAME-proposed_default"
     "chroot/etc/apt/sources.list.d/mozillateam-ubuntu-ppa-$CODENAME.list"
-    "chroot/etc/apt/sources.list"
+    "chroot/etc/apt/sources.list.old"
 )
 # Substitute Ubuntu code name into relevant apt configuration files
 for apt_config_file in "${APT_CONFIG_FILES[@]}"; do
