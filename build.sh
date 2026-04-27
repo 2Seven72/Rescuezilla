@@ -79,8 +79,12 @@ if [ ! -d "$PKG_CACHE_DIRECTORY/$DEBOOTSTRAP_CACHE_DIRECTORY" ] ; then
     # [2] http://old-releases.ubuntu.com/ubuntu
     TARGET_FOLDER=`readlink -f $PKG_CACHE_DIRECTORY/$DEBOOTSTRAP_CACHE_DIRECTORY`
     pushd ${DEBOOTSTRAP_SCRIPT_DIRECTORY}
-    DEBOOTSTRAP_DIR=${DEBOOTSTRAP_SCRIPT_DIRECTORY} ./debootstrap --arch=$ARCH --foreign $CODENAME $TARGET_FOLDER http://old-releases.ubuntu.com/ubuntu/
+    DEBOOTSTRAP_DIR=${DEBOOTSTRAP_SCRIPT_DIRECTORY} ./debootstrap --arch=$ARCH --foreign $CODENAME $TARGET_FOLDER http://archive.ubuntu.com/ubuntu/
     RET=$?
+    if [[ $RET -ne 0 ]]; then
+        DEBOOTSTRAP_DIR=${DEBOOTSTRAP_SCRIPT_DIRECTORY} ./debootstrap --arch="$ARCH" --foreign "$CODENAME" "$TARGET_FOLDER" http://old-releases.ubuntu.com/ubuntu/
+        RET=$?
+    fi
     popd
     if [[ $RET -ne 0 ]]; then
         echo "debootstrap part 1/2 failed. This may occur if you're using an older version of deboostrap"
