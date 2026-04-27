@@ -19,7 +19,7 @@ export LC_ALL=C
 # [1] https://github.com/phusion/baseimage-docker/issues/58
 echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
-sha1sum /etc/apt/sources.list /etc/apt/sources.old-rel.list /etc/apt/sources.list.d/* > $APT_SOURCES_CHECKSUM
+sha1sum /etc/apt/sources.list* /etc/apt/sources.list.d/* > $APT_SOURCES_CHECKSUM
 if [ ! -d "/var/lib/apt/lists.cache" ] ; then
     # Must update apt package indexes if there is nothing cached.
     apt-get update
