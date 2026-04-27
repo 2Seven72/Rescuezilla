@@ -26,6 +26,8 @@ CODENAME="${CODENAME:-INVALID}"
 # [1] https://help.ubuntu.com/lts/installation-guide/armhf/ch02s01.html
 ARCH="${ARCH:-INVALID}"
 
+# Apt sources URL
+URL="INVALID"
 # Directory containing this build script
 BASEDIR=$(dirname $(readlink -f "$0"))
 
@@ -65,6 +67,28 @@ if [ "$CODENAME" = "INVALID" ] || [ "$ARCH" = "INVALID" ]; then
   exit 1
 fi
 
+source "$BASEDIR/src/scripts/lib.sh"
+identify_sources_url_old_release_or_port
+
+# For end-of-life Ubuntu releases, we need to specify the paths to the GPG keys manually.
+#
+# Specifically:
+# * Ubuntu 18.04 (Bionic) uses Ubuntu Archive Automatic Signing Key (2012)
+# * Ubuntu 20.04 (Focal), 24.10 (Oracular) uses Ubuntu Archive Automatic Signing Key (2018) 
+#
+# The public keys to verify the GPG signatures of the Ubuntu DEB packages appear rotated every 6 or so years,
+# The build host machine (eg, Docker container)'s "ubuntu-keyring" package provides these GPG public keys, and the
+# "debootstrap" (eg, src/third-party/debootstrap submodule) references these paths.
+# Unfortunately since these two packages come from different sources (debootstrap is the latest upstream),
+# the paths aren't guaranteed to be aligned, so we specify them manually for now
+#
+# Useful commands :
+# * List all ubuntu GPG keys paths within the keyring package: dpkg -L ubuntu-keyring 
+# * List the keys within the keyring: gpg --show-keys /usr/share/keyrings/ubuntu-archive-keyring.gpg
+if [ "$CODENAME" == "bionic" ] || [ "$CODENAME" == "focal" ] || [ "$CODENAME" == "oracular" ]; then
+    KEYRING_OPTS="--keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg"
+fi
+
 # debootstrap part 1/2: If package cache doesn't exist, download the packages
 # used in a base Debian system into the package cache directory [1]
 #
@@ -79,12 +103,8 @@ if [ ! -d "$PKG_CACHE_DIRECTORY/$DEBOOTSTRAP_CACHE_DIRECTORY" ] ; then
     # [2] http://old-releases.ubuntu.com/ubuntu
     TARGET_FOLDER=`readlink -f $PKG_CACHE_DIRECTORY/$DEBOOTSTRAP_CACHE_DIRECTORY`
     pushd ${DEBOOTSTRAP_SCRIPT_DIRECTORY}
-    DEBOOTSTRAP_DIR=${DEBOOTSTRAP_SCRIPT_DIRECTORY} ./debootstrap --arch=$ARCH --foreign $CODENAME $TARGET_FOLDER http://archive.ubuntu.com/ubuntu/
+    DEBOOTSTRAP_DIR=${DEBOOTSTRAP_SCRIPT_DIRECTORY} ./debootstrap --arch=$ARCH --foreign $CODENAME $TARGET_FOLDER "$URL"
     RET=$?
-    if [[ $RET -ne 0 ]]; then
-        DEBOOTSTRAP_DIR=${DEBOOTSTRAP_SCRIPT_DIRECTORY} ./debootstrap --arch=$ARCH --foreign $CODENAME $TARGET_FOLDER http://old-releases.ubuntu.com/ubuntu/
-        RET=$?
-    fi
     popd
     if [[ $RET -ne 0 ]]; then
         echo "debootstrap part 1/2 failed. This may occur if you're using an older version of deboostrap"
@@ -189,11 +209,12 @@ APT_CONFIG_FILES=(
     "chroot/etc/apt/preferences.d/89_$CODENAME-backports_default"
     "chroot/etc/apt/preferences.d/90_$CODENAME-proposed_default"
     "chroot/etc/apt/sources.list.d/mozillateam-ubuntu-ppa-$CODENAME.list"
-    "chroot/etc/apt/sources.list.old"
+    "chroot/etc/apt/sources.list"
 )
 # Substitute Ubuntu code name into relevant apt configuration files
 for apt_config_file in "${APT_CONFIG_FILES[@]}"; do
   sed --in-place s/CODENAME_SUBSTITUTE/$CODENAME/g $apt_config_file
+  sed --in-place "s|URL_SUBSTITUTE|$URL|g" $apt_config_file
 done
 
 cp "$BASEDIR/chroot.steps.part.1.sh" "$BASEDIR/chroot.steps.part.2.sh" chroot
