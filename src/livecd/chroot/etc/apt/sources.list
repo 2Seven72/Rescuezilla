@@ -16,12 +16,3 @@ deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-security main universe 
 # automatically selected
 deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-backports main universe multiverse
 deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-proposed main universe multiverse
-
-deb http://old-releases.ubuntu.com/ubuntu CODENAME_SUBSTITUTE main universe multiverse
-deb http://old-releases.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-updates main universe multiverse
-deb http://old-releases.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-security main universe multiverse
-
-# Backports and proposed configured with a preference file to ensure its never
-# automatically selected
-deb http://old-releases.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-backports main universe multiverse
-deb http://old-releases.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-proposed main universe multiverse
