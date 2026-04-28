@@ -25,7 +25,7 @@ RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architectur
 # in-order to build older releases from scratch.
 #
 RUN echo $CODENAME
-COPY src/livecd/chroot/etc/apt/sources.list.old /etc/apt/sources.list
+COPY src/livecd/chroot/etc/apt/sources.list /etc/apt/sources.list
 # Copy the apt-preferences file to ensure backports and proposed repositories are never automatically selected.
 COPY "src/livecd/chroot/etc/apt/preferences.d/89_CODENAME_SUBSTITUTE-backports_default" "/etc/apt/preferences.d/89_$CODENAME-backports_default"
 COPY "src/livecd/chroot/etc/apt/preferences.d/90_CODENAME_SUBSTITUTE-proposed_default" "/etc/apt/preferences.d/90_$CODENAME-proposed_default"
@@ -35,7 +35,7 @@ RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architectur
     URL="http://archive.ubuntu.com/ubuntu" \
     ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
 ; else \
-    URL="http://ports.ubuntu.com/ubuntu-ports/ubuntu-ports" \
+    URL="http://old-releases.ubuntu.com/ubuntu" \
     ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
 ; fi
 
