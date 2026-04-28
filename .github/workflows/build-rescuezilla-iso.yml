@@ -45,11 +45,19 @@ jobs:
       - name: Run unit tests within the Docker container
         run: make docker-test
 
+      - name: Create completed artifacts folder
+        run: mkdir build/
+
       - run: make docker-status
-      - name: Make Ubuntu 22.10 (Kinetic) ISO
-        run: make docker-kinetic
-      - run: sudo mv build/rescuezilla.amd64.kinetic.iso build/rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
-      - run: sudo make clean-all
+      - name: Make DEB package
+        run: make docker-deb
+      - run: sudo mv build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
+
+      # - run: make docker-status
+      # - name: Make Ubuntu 22.10 (Kinetic) ISO
+        # run: make docker-kinetic
+      # - run: sudo mv build/rescuezilla.amd64.kinetic.iso build/rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
+      # - run: sudo make clean-all
 
       - run: make docker-status
       - name: Make Ubuntu 22.04 LTS (Jammy) ISO [LTS  = Long Term Support]
@@ -64,10 +72,13 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
         with:
+          name: ${{github.ref_name}} (${{env.RELEASE_DATE}})
           files: |
             build/*SUM
             build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
             build/rescuezilla-${{github.ref_name}}-*.iso
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Upload GitHub Action workflow *artifacts*. Note "artifacts" are a different concept to GitHub release rssets. The former is available on each GitHub Actions
       # workflow run. The latter is associated with only a pushed tag.
@@ -92,10 +103,10 @@ jobs:
           name: rescuezilla_${{env.DEB_VERSION}}-1_all.deb
           path: build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
-          path: build/rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
+      # - uses: actions/upload-artifact@v4
+        # with:
+          # name: rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
+          # path: build/rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
 
       - uses: actions/upload-artifact@v4
         with:
