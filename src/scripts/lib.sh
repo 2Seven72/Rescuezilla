@@ -29,12 +29,12 @@ function identify_sources_url_old_release_or_port() {
   if [ "$CODENAME" = "INVALID" ] || [ "$ARCH" = "INVALID" ]; then
     echo "The variable CODENAME=${CODENAME} or ARCH=${ARCH} was not set correctly. Are you using the Makefile? Please consult build instructions."
     exit 1
+  elif [ "$CODENAME" = "kinetic" ]; then
+    echo "Setting URL to old releases mirror"
+    URL="$OLD_REL_URL"
   elif [ "$ARCH" = "amd64" ] || [ "$ARCH" = "i386" ]; then
     echo "Setting URL to main mirror"
     URL="$PRIMARY_URL"
-  elif
-    echo "Setting URL to old releases mirror"
-    URL="$OLD_REL_URL"
   else
     echo "Setting URL to ports mirror"
     URL="$PORTS_URL"
