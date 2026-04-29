@@ -1,5 +1,21 @@
 .DEFAULT_GOAL := kinetic
-.PHONY: all focal impish jammy kinetic bionic-i386 deb sfdisk.v2.20.1.amd64 partclone.restore.v0.2.43.amd64 partclone-latest partclone-utils partclone-nbd install test integration-test clean-build-dir clean clean-all
+.PHONY: all \
+focal \
+impish \
+jammy \
+kinetic \
+bionic-i386 \
+deb \
+sfdisk.v2.20.1.amd64 \
+partclone.restore.v0.2.43.amd64 \
+partclone-latest \
+partclone-utils \
+partclone-nbd \
+install \
+test integration-test \
+clean-build-dir \
+clean \
+clean-all
 
 # FIXME: Properly specify the build artifacts to allow the GNU make to actually be smart about what gets built and when.
 # FIXME: This lack of specifying dependency graph means requires eg, `make focal` and `make impish` has to be done as separate invocations
