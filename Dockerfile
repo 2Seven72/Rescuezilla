@@ -15,9 +15,6 @@ ARG CODENAME=kinetic
 ARG RUNNING_CONTAINER_ARCH
 RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architecture)}"
 
-# Apt sources URL
-URL="INVALID"
-
 source "$BASEDIR/src/scripts/lib.sh"
 identify_sources_url_old_release_or_port
 
