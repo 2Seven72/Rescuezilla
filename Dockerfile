@@ -35,7 +35,7 @@ RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architectur
     URL="http://archive.ubuntu.com/ubuntu" \
     ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
 ; else \
-    URL="http://old-releases.ubuntu.com/ubuntu" \
+    URL="http://ports.ubuntu.com/ubuntu-ports/ubuntu-ports" \
     ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
 ; fi
 
