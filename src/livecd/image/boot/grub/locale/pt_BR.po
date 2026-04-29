@@ -1,0 +1,55 @@
+# Portuguese Brazilian translation of Rescuezilla
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Vinicios de Lima Clarindo <vinicioslc@outlook.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-10 12:12+0930\n"
+"PO-Revision-Date: 2025-06-27 16:39+0000\n"
+"Last-Translator: Manuela Silva <mmsrs@sky.com>\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.13-dev\n"
+
+msgid "Start Rescuezilla"
+msgstr "Iniciar Rescuezilla"
+
+msgid "If boot fails, reboot and try selecting Graphical fallback instead"
+msgstr "Se a inicialização falhar, reinicie e selecione o Modo - Fallback Gráfico"
+
+msgid "Graphical fallback mode"
+msgstr "Modo - Fallback Gráfico"
+
+msgid "Use low-resolution fallback graphics driver if standard mode doesn't work for your hardware"
+msgstr "Utilize um driver gráfico de baixa resolução se o modo padrão não funcionar em seu hardware"
+
+msgid "Load USB into RAM"
+msgstr "Carregar USB na RAM"
+
+msgid "Loads Rescuezilla into memory allowing the boot media to be ejected after bootup"
+msgstr "Carrega o Rescuezilla na memória, permitindo que a mídia de inicialização seja ejetada após a inicialização"
+
+msgid "Check USB for defects"
+msgstr "Verificar USB por defeitos"
+
+msgid "Verify integrity of USB drive"
+msgstr "Verificar a integridade da unidade USB"
+
+msgid "Enter BIOS Setup"
+msgstr "Entrar na configuração do BIOS"
+
+msgid "Configure machine's firmware, boot options etc"
+msgstr "Configurar o firmware da máquina, opções de inicialização e etc"
+
+msgid "Memory test"
+msgstr "Teste de memória"
+
+msgid "Check computer memory for errors"
+msgstr "Verificar se há erros na memória do computador"
