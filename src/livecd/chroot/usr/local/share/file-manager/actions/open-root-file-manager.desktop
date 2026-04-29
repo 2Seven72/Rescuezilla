@@ -1,6 +1,12 @@
 [Desktop Entry]
 Type=Action
 Name=Open root file manager
+Name[de]=Öffnen Sie den Root-Dateimanager
+Name[es]=Abrir el gestor de archivos raíz
+Name[fr]=Gestionnaire de fichiers racine ouvert
+Name[it]=Apri il gestore di file come root
+Name[pt]=Abrir o gestor de ficheiros raiz
+Name[pt_BR]=Abrir o gerenciador de arquivos raiz
 Profiles=profile-zero;
 Icon=system-file-manager
 
@@ -8,3 +14,9 @@ Icon=system-file-manager
 MimeTypes=inode/directory;
 Exec=/usr/local/bin/xdg-open-pkexec %f
 Name=Default profile
+Name[de]=Standardprofil
+Name[es]=Perfil predeterminado
+Name[fr]=Profil par défaut
+Name[it]=Profilo predefinito
+Name[pt]=Perfil predefinido
+Name[pt_BR]=Perfil padrão
