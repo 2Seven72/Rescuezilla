@@ -172,23 +172,37 @@ lang_codes_f=(
              "pt-br"
 )
 
+lang_codes_fs=(
+             "es_es"
+             "pt_br"
+)
+
 # Prepare list of language packs to install
+language_glob=()
 language_pack_gnome_base_pkgs=()
 firefox_locale_pkgs=()
 for lang in "${lang_codes[@]}"
 do
+     language_glob+=("$lang")
      firefox_locale_pkgs+=("firefox-locale-$lang")
      language_pack_gnome_base_pkg+=("language-pack-gnome-$lang-base")
 done
 
 for lang in "${lang_codes_g[@]}"
 do
+     language_glob+=("$lang")
      language_pack_gnome_base_pkg+=("language-pack-gnome-$lang-base")
 done
 
 for lang in "${lang_codes_f[@]}"
 do
+     language_glob+=("$lang")
      firefox_locale_pkgs+=("firefox-locale-$lang")
+done
+
+for lang in "${lang_codes_fs[@]}"
+do
+     language_glob+=("$lang")
 done
 
 # Packages common to both  32-bit and 64-bit build
