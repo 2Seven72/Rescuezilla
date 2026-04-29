@@ -18,6 +18,9 @@ RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architectur
 # Apt sources URL
 URL="INVALID"
 
+source "$BASEDIR/src/scripts/lib.sh"
+identify_sources_url_old_release_or_port
+
 # Copy the apt repository mirror list into the Docker image.
 # 
 # For increased transfer rates, consider selecting a mirror geographically
@@ -27,8 +30,6 @@ URL="INVALID"
 # moved to the 'old-releases' URL, which makes substitution becomes mandatory
 # in-order to build older releases from scratch.
 #
-source "$BASEDIR/src/scripts/lib.sh"
-identify_sources_url_old_release_or_port
 
 RUN echo $CODENAME
 COPY src/livecd/chroot/etc/apt/sources.list /etc/apt/sources.list
