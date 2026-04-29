@@ -1,3 +1,4 @@
 Package: *
-Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 900
+# Pin: release o=LP-PPA-mozillateam
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
