@@ -3,8 +3,8 @@
 #
 
 PRIMARY_URL="${PRIMARY_URL:-http://archive.ubuntu.com/ubuntu}"
-PORTS_URL="${PORTS_URL:-http://old-releases.ubuntu.com/ubuntu}"
-# PORTS_URL="${PORTS_URL:-http://ports.ubuntu.com/ubuntu-ports}"
+OLD_REL_URL="${OLD_REL_URL:-http://old-releases.ubuntu.com/ubuntu}"
+PORTS_URL="${PORTS_URL:-http://ports.ubuntu.com/ubuntu-ports}"
 
 # Returns the HTTP status code for a URL without downloading the body.
 # $1: URL to check
@@ -32,6 +32,9 @@ function identify_sources_url_old_release_or_port() {
   elif [ "$ARCH" = "amd64" ] || [ "$ARCH" = "i386" ]; then
     echo "Setting URL to main mirror"
     URL="$PRIMARY_URL"
+  elif
+    echo "Setting URL to ports mirror"
+    URL="$OLD_REL_URL"
   else
     echo "Setting URL to ports mirror"
     URL="$PORTS_URL"
