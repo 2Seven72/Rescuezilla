@@ -15,6 +15,9 @@ ARG CODENAME=kinetic
 ARG RUNNING_CONTAINER_ARCH
 RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architecture)}"
 
+# Apt sources URL
+URL="INVALID"
+
 # Copy the apt repository mirror list into the Docker image.
 # 
 # For increased transfer rates, consider selecting a mirror geographically
@@ -24,6 +27,9 @@ RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architectur
 # moved to the 'old-releases' URL, which makes substitution becomes mandatory
 # in-order to build older releases from scratch.
 #
+source "$BASEDIR/src/scripts/lib.sh"
+identify_sources_url_old_release_or_port
+
 RUN echo $CODENAME
 COPY src/livecd/chroot/etc/apt/sources.list /etc/apt/sources.list
 # Copy the apt-preferences file to ensure backports and proposed repositories are never automatically selected.
@@ -41,6 +47,15 @@ RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architectur
     URL="http://ports.ubuntu.com/ubuntu-ports" \
     ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
 ; fi
+
+APT_FILES=(
+    "chroot/etc/apt/sources.list"
+)
+
+# Substitute Ubuntu code name into relevant apt configuration files
+for apt_file in "${APT_FILES[@]}"; do
+  sed --in-place "s|URL_SUBSTITUTE|$URL|g" $apt_config_file
+done
 
 
 RUN sed --in-place "s*CODENAME_SUBSTITUTE*$CODENAME*g" "/etc/apt/sources.list"
