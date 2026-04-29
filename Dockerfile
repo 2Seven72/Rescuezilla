@@ -24,6 +24,16 @@ RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architectur
 # moved to the 'old-releases' URL, which makes substitution becomes mandatory
 # in-order to build older releases from scratch.
 #
+PRIMARY_URL="${PRIMARY_URL:-http://archive.ubuntu.com/ubuntu}"
+OLD_REL_URL="${OLD_REL_URL:-http://old-releases.ubuntu.com/ubuntu}"
+PORTS_URL="${PORTS_URL:-http://ports.ubuntu.com/ubuntu-ports}"
+
+# Returns the HTTP status code for a URL without downloading the body.
+# $1: URL to check
+function get_url_http_status() {
+  local url="${1}"
+  curl --head --silent --output /dev/null --write-out "%{http_code}" "$url"
+}
 
 RUN echo $CODENAME
 COPY src/livecd/chroot/etc/apt/sources.list /etc/apt/sources.list
@@ -31,7 +41,19 @@ COPY src/livecd/chroot/etc/apt/sources.list /etc/apt/sources.list
 COPY "src/livecd/chroot/etc/apt/preferences.d/89_CODENAME_SUBSTITUTE-backports_default" "/etc/apt/preferences.d/89_$CODENAME-backports_default"
 COPY "src/livecd/chroot/etc/apt/preferences.d/90_CODENAME_SUBSTITUTE-proposed_default" "/etc/apt/preferences.d/90_$CODENAME-proposed_default"
 
-function () {
+# RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architecture)}" \
+# ; if [ "$RUNNING_CONTAINER_ARCH" = "amd64" ] || [ "$RUNNING_CONTAINER_ARCH" = "i386" ]; then \
+    # URL="http://archive.ubuntu.com/ubuntu" \
+    # ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
+# ; elfi \
+    # URL="http://old-releases.ubuntu.com/ubuntu" \
+    # ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
+# ; else \
+    # URL="http://ports.ubuntu.com/ubuntu-ports" \
+    # ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
+# ; fi
+
+function identify_sources_url_old_release_or_port() {
   if [ "$CODENAME" = "kinetic" ] || [ "$CODENAME" = "INVALID" ] || [ "$ARCH" = "INVALID" ]; then
     echo "The variable CODENAME=${CODENAME} or ARCH=${ARCH} was not set correctly. Are you using the Makefile? Please consult build instructions."
     exit 1
@@ -46,18 +68,6 @@ function () {
     URL="$PORTS_URL"
   fi
 }
-
-# RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architecture)}" \
-# ; if [ "$RUNNING_CONTAINER_ARCH" = "amd64" ] || [ "$RUNNING_CONTAINER_ARCH" = "i386" ]; then \
-    # URL="http://archive.ubuntu.com/ubuntu" \
-    # ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
-# ; elfi \
-    # URL="http://old-releases.ubuntu.com/ubuntu" \
-    # ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
-# ; else \
-    # URL="http://ports.ubuntu.com/ubuntu-ports" \
-    # ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
-# ; fi
 
 RUN sed --in-place "s*CODENAME_SUBSTITUTE*$CODENAME*g" "/etc/apt/sources.list"
 RUN cat /etc/apt/sources.list
