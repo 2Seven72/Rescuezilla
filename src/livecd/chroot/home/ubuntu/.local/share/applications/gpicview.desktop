@@ -1,7 +1,12 @@
 [Desktop Entry]
 Categories=Graphics;Utility;Core;GTK;Viewer;RasterGraphics;2DGraphics;Photography;
 Comment=View your images easily
-Comment[fr]=Visionner des images facilement
+Comment[de]=Betrachten Sie Ihre Bilder ganz einfach
+Comment[es]=Visualiza tus imágenes fácilmente
+Comment[fr]=Visualisez facilement vos images
+Comment[it]=Visualizza facilmente le tue immagini
+Comment[pt]=Visualize as suas imagens facilmente
+Comment[pt_BR]=Visualize suas imagens facilmente
 Encoding=UTF-8
 Exec=gpicview %f
 GenericName=Image Viewer
@@ -10,6 +15,12 @@ Hidden=true
 Icon=gpicview
 MimeType=image/bmp;image/gif;image/jpeg;image/jpg;image/png;image/tiff;image/x-bmp;image/x-pcx;image/x-tga;image/x-portable-pixmap;image/x-portable-bitmap;image/x-targa;image/x-portable-greymap;application/pcx;image/svg+xml;image/svg-xml;
 Name=Image Viewer
+Name[de]=Bildbetrachter
+Name[es]=Visor de imágenes
+Name[fr]=Visionneuse d'images
+Name[it]=Visualizzatore di immagini
+Name[pt]=Visualizador de imagens
+Name[pt_BR]=Visualizador de imagens
 StartupNotify=true
 Terminal=false
 Type=Application
