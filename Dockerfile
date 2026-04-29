@@ -32,17 +32,16 @@ COPY "src/livecd/chroot/etc/apt/preferences.d/89_CODENAME_SUBSTITUTE-backports_d
 COPY "src/livecd/chroot/etc/apt/preferences.d/90_CODENAME_SUBSTITUTE-proposed_default" "/etc/apt/preferences.d/90_$CODENAME-proposed_default"
 
 RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architecture)}" \
-; if [ "$RUNNING_CONTAINER_ARCH" = "amd64" ] || [ "$RUNNING_CONTAINER_ARCH" = "i386" ]; then \
+if [ "$RUNNING_CONTAINER_ARCH" = "amd64" ] || [ "$RUNNING_CONTAINER_ARCH" = "i386" ] || [ "$CODENAME" = "kinetic" ]; then \
     URL="http://archive.ubuntu.com/ubuntu" \
-    ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
-; elfi \
+    sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
+elfi \
     URL="http://old-releases.ubuntu.com/ubuntu" \
-    ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
-; else \
+    sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
+else \
     URL="http://ports.ubuntu.com/ubuntu-ports" \
-    ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
-; fi
-
+    sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
+fi
 
 RUN sed --in-place "s*CODENAME_SUBSTITUTE*$CODENAME*g" "/etc/apt/sources.list"
 RUN cat /etc/apt/sources.list
