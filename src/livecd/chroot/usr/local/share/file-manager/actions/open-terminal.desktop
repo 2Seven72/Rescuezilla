@@ -1,8 +1,12 @@
 [Desktop Entry]
 Type=Action
 Name=Open current directory in terminal
-Name[fr]=Terminal
-Name[de]=Befehlszeile verwenden
+Name[de]=Aktuelles Verzeichnis in der Befehlszeile öffnen
+Name[es]=Abrir el directorio actual en la línea de comandos
+Name[fr]=Ouvrir le répertoire courant en ligne de commande
+Name[it]=Apri la directory corrente nella riga di comando
+Name[pt]=Abrir a pasta atual na linha de comandos
+Name[pt_BR]=Abrir o diretório atual na linha de comandos
 Profiles=profile-zero;
 Icon=utilities-terminal
 
@@ -11,3 +15,9 @@ MimeTypes=inode/directory;
 # Not using /usr/bin/x-terminal-emulator here, as the argument is non-portable.
 Exec=/usr/local/bin/xfce4-terminal-pkexec --working-directory=%f
 Name=Default profile
+Name[de]=Standardprofil
+Name[es]=Perfil predeterminado
+Name[fr]=Profil par défaut
+Name[it]=Profilo predefinito
+Name[pt]=Perfil predefinido
+Name[pt_BR]=Perfil padrão
