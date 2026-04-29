@@ -31,6 +31,22 @@ COPY src/livecd/chroot/etc/apt/sources.list /etc/apt/sources.list
 COPY "src/livecd/chroot/etc/apt/preferences.d/89_CODENAME_SUBSTITUTE-backports_default" "/etc/apt/preferences.d/89_$CODENAME-backports_default"
 COPY "src/livecd/chroot/etc/apt/preferences.d/90_CODENAME_SUBSTITUTE-proposed_default" "/etc/apt/preferences.d/90_$CODENAME-proposed_default"
 
+function identify_sources_url_old_release_or_port() {
+  if [ "$CODENAME" = "kinetic" ] || [ "$CODENAME" = "INVALID" ] || [ "$ARCH" = "INVALID" ]; then
+    echo "The variable CODENAME=${CODENAME} or ARCH=${ARCH} was not set correctly. Are you using the Makefile? Please consult build instructions."
+    exit 1
+  elif [ "$ARCH" = "amd64" ] || [ "$ARCH" = "i386" ]; then
+    echo "Setting URL to main mirror"
+    URL="$PRIMARY_URL"
+  elif
+    echo "Setting URL to old releases mirror"
+    URL="$OLD_REL_URL"
+  else
+    echo "Setting URL to ports mirror"
+    URL="$PORTS_URL"
+  fi
+}
+
 # RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architecture)}" \
 # ; if [ "$RUNNING_CONTAINER_ARCH" = "amd64" ] || [ "$RUNNING_CONTAINER_ARCH" = "i386" ]; then \
     # URL="http://archive.ubuntu.com/ubuntu" \
