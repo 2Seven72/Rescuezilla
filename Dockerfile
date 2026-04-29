@@ -60,7 +60,7 @@ function identify_sources_url_old_release_or_port() {
   elif [ "$ARCH" = "amd64" ] || [ "$ARCH" = "i386" ]; then
     echo "Setting URL to main mirror"
     URL="$PRIMARY_URL"
-  elif
+  elif [ "$CODENAME" = "kinetic" ]; then
     echo "Setting URL to old releases mirror"
     URL="$OLD_REL_URL"
   else
