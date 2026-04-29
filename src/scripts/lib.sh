@@ -3,7 +3,8 @@
 #
 
 PRIMARY_URL="${PRIMARY_URL:-http://archive.ubuntu.com/ubuntu}"
-PORTS_URL="${PORTS_URL:-http://ports.ubuntu.com/ubuntu-ports/ubuntu-ports}"
+PORTS_URL="${PORTS_URL:-http://old-releases.ubuntu.com/ubuntu}"
+# PORTS_URL="${PORTS_URL:-http://ports.ubuntu.com/ubuntu-ports}"
 
 # Returns the HTTP status code for a URL without downloading the body.
 # $1: URL to check
