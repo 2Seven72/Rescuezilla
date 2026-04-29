@@ -33,7 +33,7 @@ function identify_sources_url_old_release_or_port() {
     echo "Setting URL to main mirror"
     URL="$PRIMARY_URL"
   elif
-    echo "Setting URL to ports mirror"
+    echo "Setting URL to old releases mirror"
     URL="$OLD_REL_URL"
   else
     echo "Setting URL to ports mirror"
