@@ -45,9 +45,6 @@ jobs:
       - name: Run unit tests within the Docker container
         run: make docker-test
 
-      - name: Create completed artifacts folder
-        run: mkdir build/
-
       - run: make docker-status
       - name: Make DEB package
         run: make docker-deb
