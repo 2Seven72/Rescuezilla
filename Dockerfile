@@ -43,15 +43,6 @@ RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architectur
     ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
 ; fi
 
-APT_FILES=(
-    "chroot/etc/apt/sources.list"
-)
-
-# Substitute Ubuntu code name into relevant apt configuration files
-for apt_file in "${APT_FILES[@]}"; do
-  sed --in-place "s|URL_SUBSTITUTE|$URL|g" $apt_config_file
-done
-
 
 RUN sed --in-place "s*CODENAME_SUBSTITUTE*$CODENAME*g" "/etc/apt/sources.list"
 RUN cat /etc/apt/sources.list
