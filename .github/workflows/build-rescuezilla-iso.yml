@@ -45,11 +45,6 @@ jobs:
       - name: Run unit tests within the Docker container
         run: make docker-test
 
-      - run: make docker-status
-      - name: Make DEB package
-        run: make docker-deb
-      - run: sudo mv build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
-
       # - run: make docker-status
       # - name: Make Ubuntu 22.10 (Kinetic) ISO
         # run: make docker-kinetic
