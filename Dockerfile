@@ -31,7 +31,7 @@ COPY src/livecd/chroot/etc/apt/sources.list /etc/apt/sources.list
 COPY "src/livecd/chroot/etc/apt/preferences.d/89_CODENAME_SUBSTITUTE-backports_default" "/etc/apt/preferences.d/89_$CODENAME-backports_default"
 COPY "src/livecd/chroot/etc/apt/preferences.d/90_CODENAME_SUBSTITUTE-proposed_default" "/etc/apt/preferences.d/90_$CODENAME-proposed_default"
 
-function identify_sources_url_old_release_or_port() {
+function () {
   if [ "$CODENAME" = "kinetic" ] || [ "$CODENAME" = "INVALID" ] || [ "$ARCH" = "INVALID" ]; then
     echo "The variable CODENAME=${CODENAME} or ARCH=${ARCH} was not set correctly. Are you using the Makefile? Please consult build instructions."
     exit 1
