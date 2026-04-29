@@ -28,7 +28,7 @@ else
     diff $APT_SOURCES_CHECKSUM /var/lib/apt/lists.cache/apt.sources.checksum.txt
     if [ $? -ne 0 ]; then
         apt-get update
-    else 
+    else
         rm -rf /var/lib/apt/lists
         mv /var/lib/apt/lists.cache /var/lib/apt/lists
     fi
@@ -158,10 +158,18 @@ pkgs_specific_to_ubuntu2210_kinetic=(
 # Languages on the system
 lang_codes=(
              "de"
-             "es"
              "fr"
              "it"
+)
+
+lang_codes_g=(
+             "es"
              "pt"
+)
+
+lang_codes_f=(
+             "es-es"
+             "pt-br"
 )
 
 # Prepare list of language packs to install
@@ -171,6 +179,16 @@ for lang in "${lang_codes[@]}"
 do
      firefox_locale_pkgs+=("firefox-locale-$lang")
      language_pack_gnome_base_pkg+=("language-pack-gnome-$lang-base")
+done
+
+for lang in "${lang_codes_g[@]}"
+do
+     language_pack_gnome_base_pkg+=("language-pack-gnome-$lang-base")
+done
+
+for lang in "${lang_codes_f[@]}"
+do
+     firefox_locale_pkgs+=("firefox-locale-$lang")
 done
 
 # Packages common to both  32-bit and 64-bit build
@@ -332,7 +350,7 @@ sed --in-place 's/#DefaultTimeoutStopSec=90s/DefaultTimeoutStopSec=10s/g' /etc/s
 
 # Prevent "initramfs unpacking failed: Decoding failed" message on Ubuntu 19.10
 # and Ubuntu 20.04 systems [1] [2]. Using gzip means supposedly slower boot
-# than lz4 compression, but it's a worthwhile trade-off to prevent any 
+# than lz4 compression, but it's a worthwhile trade-off to prevent any
 # non-technical end-users from seeing an error message.
 # [1] https://bugs.launchpad.net/ubuntu/+source/ubuntu-meta/+bug/1870260
 # [2] https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1835660
