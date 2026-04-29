@@ -34,8 +34,11 @@ RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architectur
 ; if [ "$RUNNING_CONTAINER_ARCH" = "amd64" ] || [ "$RUNNING_CONTAINER_ARCH" = "i386" ]; then \
     URL="http://archive.ubuntu.com/ubuntu" \
     ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
+; elfi \
+    URL="http://old-releases.ubuntu.com/ubuntu" \
+    ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
 ; else \
-    URL="http://ports.ubuntu.com/ubuntu-ports/ubuntu-ports" \
+    URL="http://ports.ubuntu.com/ubuntu-ports" \
     ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
 ; fi
 
