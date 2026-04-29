@@ -1,8 +1,12 @@
 [Desktop Entry]
 Type=Action
 Name=Display resolution and layout
-Name[fr]=ARandR
-Name[de]=Bildschirmeinstellungen
+Name[de]=Bildschirmauflösung und Anordnung
+Name[es]=Resolución de pantalla y disposición
+Name[fr]=Résolution de l’écran et disposition
+Name[it]=Risoluzione dello schermo e disposizione
+Name[pt]=Resolução do ecrã e disposição
+Name[pt_BR]=Resolução da tela e layout
 Profiles=profile-zero;
 Icon=preferences-desktop-display
 
@@ -13,3 +17,9 @@ MimeTypes=inode/directory;
 # operations. However lxrandr has been buggy in VirtualBox testing, so only providing arandr for users.
 Exec=/usr/bin/arandr
 Name=Default profile
+Name[de]=Standardprofil
+Name[es]=Perfil predeterminado
+Name[fr]=Profil par défaut
+Name[it]=Profilo predefinito
+Name[pt]=Perfil predefinido
+Name[pt_BR]=Perfil padrão
