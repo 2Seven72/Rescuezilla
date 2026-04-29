@@ -7,10 +7,8 @@ on:
 
 jobs:
   rescuezilla-iso-build:
-    # The build bot OS environment does not really matter, as the docker image
-    # provides the primary host environment for the build. However, a more recent
-    # OS provides a more recent Docker release, which means additional Docker
-    # functionality.
+    # The build bot OS environment does not really matter, as the docker image provides the primary host environment for the build.
+    # However, a more recent OS provides a more recent Docker release, which means additional Docker functionality.
     # Launches Docker container to act as 'host system'. See BUILD.ISO.IMAGE.md for more information.
     runs-on: ubuntu-latest
     permissions:
@@ -70,8 +68,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Upload GitHub Action workflow *artifacts*. Note "artifacts" are a different concept to GitHub release rssets. The former is available on each GitHub Actions
-      # workflow run. The latter is associated with only a pushed tag.
+      # Upload GitHub Action workflow *artifacts*. Note "artifacts" are a different concept to GitHub release rssets.
+      # The former is available on each GitHub Actions workflow run. The latter is associated with only a pushed tag.
 
       - uses: actions/upload-artifact@v4
         with:
