@@ -29,7 +29,7 @@ if git_process.returncode != 0:
 	sys.exit(1)
 git_root = git_process.stdout
 print("Using git_root: " + git_root)
-language_glob = os.path.join(git_root.strip(), "src/apps/rescuezilla/rescuezilla/usr/share/locale/*")
+language_glob = os.path.join(git_root.strip(), "src/apps/rescuezilla/rescuezilla/usr/share/locale/$lang")
 print("Using glob: " + language_glob)
 
 language_dir_list = glob.glob(language_glob)
