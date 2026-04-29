@@ -54,13 +54,11 @@ jobs:
       # - name: Make Ubuntu 22.10 (Kinetic) ISO
         # run: make docker-kinetic
       # - run: sudo mv build/rescuezilla.amd64.kinetic.iso build/rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
-      # - run: sudo make clean-all
 
       - run: make docker-status
       - name: Make Ubuntu 22.04 LTS (Jammy) ISO [LTS  = Long Term Support]
         run: make docker-jammy
       - run: sudo mv build/rescuezilla.amd64.jammy.iso build/rescuezilla-${{github.ref_name}}-64bit.jammy.iso
-      - run: sudo make clean-all
 
       - name: Create checksums for ISO images
         run: cd build && sudo ../src/scripts/create_iso_checksums.sh rescuezilla_${{env.DEB_VERSION}}-1_all.deb  rescuezilla-${{github.ref_name}}-*.iso
