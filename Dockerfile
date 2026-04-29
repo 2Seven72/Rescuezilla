@@ -33,10 +33,10 @@ COPY "src/livecd/chroot/etc/apt/preferences.d/90_CODENAME_SUBSTITUTE-proposed_de
 
 RUN RUNNING_CONTAINER_ARCH="${RUNNING_CONTAINER_ARCH:-$(dpkg --print-architecture)}" \
 ; if [ "$RUNNING_CONTAINER_ARCH" = "amd64" ] || [ "$RUNNING_CONTAINER_ARCH" = "i386" ]; then \
-    URL="http://old-releases.ubuntu.com/ubuntu" \
+    URL="http://archive.ubuntu.com/ubuntu" \
     ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
 ; elfi \
-    URL="http://archive.ubuntu.com/ubuntu" \
+    URL="http://old-releases.ubuntu.com/ubuntu" \
     ; sed --in-place "s*URL_SUBSTITUTE*$URL*g" "/etc/apt/sources.list" \
 ; else \
     URL="http://ports.ubuntu.com/ubuntu-ports" \
