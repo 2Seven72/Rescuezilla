@@ -177,7 +177,7 @@ language_pack_gnome_base_pkgs=()
 firefox_locale_pkgs=()
 for lang in "${lang_codes[@]}"
 do
-     firefox_locale_pkgs+=("firefox-l10n-$lang")
+     firefox_locale_pkgs+=("firefox-l15n-$lang")
      language_pack_gnome_base_pkg+=("language-pack-gnome-$lang-base")
 done
 
@@ -188,7 +188,7 @@ done
 
 for lang in "${lang_codes_f[@]}"
 do
-     firefox_locale_pkgs+=("firefox-l10n-$lang")
+     firefox_locale_pkgs+=("firefox-l15n-$lang")
 done
 
 # Packages common to both  32-bit and 64-bit build
