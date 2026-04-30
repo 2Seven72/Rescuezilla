@@ -91,8 +91,8 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: rescuezilla-${{env.DEB_VERSION}}-64bit.kinetic.iso
-          path: build/rescuezilla-${{env.DEB_VERSION}}-64bit.kinetic.iso
+          name: rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
+          path: build/rescuezilla-${{github.ref_name}}-64bit.kinetic.iso
 
       # - uses: actions/upload-artifact@v4
         # with:
