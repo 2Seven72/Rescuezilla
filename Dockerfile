@@ -4,12 +4,12 @@
 # Note: the host system Ubuntu version (below) is defined separately from the version of the
 # generated Ubuntu image.
 
-ARG CODENAME=kinetic
-# ARG CODENAME=jammy
+# ARG CODENAME=kinetic
+ARG CODENAME=jammy
 FROM ubuntu:${CODENAME}
 # Define the Ubuntu code name again because Docker clears the argument after the FROM command.
-ARG CODENAME=kinetic
-# ARG CODENAME=jammy
+# ARG CODENAME=kinetic
+ARG CODENAME=jammy
 
 # Detect the running container architecture (can be overridden via --build-arg)
 ARG RUNNING_CONTAINER_ARCH
