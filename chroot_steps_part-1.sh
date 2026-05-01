@@ -194,6 +194,8 @@ do
      firefox_locale_pkgs+=("firefox-l10n-$lang")
 done
 
+apt-cache search firefox-l10n
+
 # Packages common to both  32-bit and 64-bit build
 # TODO: Documentation each package with why these particular packages are present,
 # TODO: and what they do.
@@ -328,8 +330,6 @@ if [[ $? -ne 0 ]]; then
     echo "Error: Failed to install packages."
     exit 1
 fi
-
-apt-cache search firefox-l10n
 
 if  [ "$CODENAME" == "bionic" ]; then
   # Ensure the Python3 symlink points to Python 3.7 on Ubuntu 18.04 Bionic, as it uses Python 3.6 by default
