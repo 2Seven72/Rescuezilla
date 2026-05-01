@@ -22,8 +22,12 @@ jobs:
 
       # Extract human-readable version string from the most recent CHANGELOG entry
       - run: echo "RESCUEZILLA_RELEASE_NAME=\"$(git grep -h -E -o '[a-zA-Z].*)' CHANGELOG | head -1)\"" >> $GITHUB_ENV
+
       # Get deb package version using same command from its build scripts
       - run: echo "DEB_VERSION=$(git describe --tags  --match='[0-9].[0-9]*' --abbrev=0)" >> $GITHUB_ENV
+
+      # Define tag name
+      - run: echo "RELEASE_TAG=v${DEB_VERSION}" >> $GITHUB_ENV
 
       - name: Build Docker image
         run: make docker-build
@@ -54,17 +58,31 @@ jobs:
       - name: Create checksums for ISO images
         run: cd build && sudo ../src/scripts/create_iso_checksums.sh rescuezilla_${{env.DEB_VERSION}}-1_all.deb rescuezilla-${{env.DEB_VERSION}}-*.iso
 
+      # Create tag automatically if it does not exist
+      - name: Create tag if not exists
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          if git rev-parse "${{env.RELEASE_TAG}}" >/dev/null 2>&1; then
+            echo "Tag already exists, skipping"
+          else
+            git tag "${{env.RELEASE_TAG}}"
+            git push origin "${{env.RELEASE_TAG}}"
+          fi
+
       - name: Upload release assets (on tag push)
         uses: softprops/action-gh-release@v1
         # if: github.event_name == 'workflow_dispatch' && contains(github.ref, 'refs/tags/')
         with:
+          tag_name: ${{env.RELEASE_TAG}}
           name: ${{env.DEB_VERSION}} (${{env.RELEASE_DATE}})
           files: |
-            # build/*SUM
-            # build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
+            build/*SUM
+            build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
             build/rescuezilla-${{env.DEB_VERSION}}-*.iso
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       # Upload GitHub Action workflow *artifacts*. Note "artifacts" are a different concept to GitHub release rssets.
       # The former is available on each GitHub Actions workflow run. The latter is associated with only a pushed tag.
@@ -98,4 +116,3 @@ jobs:
         with:
           name: rescuezilla-${{env.DEB_VERSION}}-64bit.jammy.iso
           path: build/rescuezilla-${{env.DEB_VERSION}}-64bit.jammy.iso
-
