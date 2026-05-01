@@ -168,6 +168,9 @@ lang_codes_g=(
 )
 
 lang_codes_f=(
+             "de-de"
+             "fr-fr"
+             "it-it"
              "es-es"
              "pt-br"
 			 "pt-pt"
