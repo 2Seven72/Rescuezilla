@@ -170,6 +170,7 @@ lang_codes_g=(
 lang_codes_f=(
              "es-es"
              "pt-br"
+			 "pt-pt"
 )
 
 # Prepare list of language packs to install
