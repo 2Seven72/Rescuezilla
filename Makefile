@@ -30,7 +30,7 @@ BASE_BUILD_DIRECTORY ?= $(shell pwd)/build
 # Set threads variable to N-1 cpu cores.
 THREADS = `cat /proc/cpuinfo | grep process | tail -1 | cut -d":" -f2 | cut -d" " -f2`
 
-all: focal
+# all: focal
 
 buildscripts = build.sh chroot_steps_part-1.sh chroot_steps_part-2.sh
 
