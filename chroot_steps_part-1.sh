@@ -329,6 +329,8 @@ if [[ $? -ne 0 ]]; then
     exit 1
 fi
 
+apt-cache search firefox-l10n
+
 if  [ "$CODENAME" == "bionic" ]; then
   # Ensure the Python3 symlink points to Python 3.7 on Ubuntu 18.04 Bionic, as it uses Python 3.6 by default
   # and Rescuezilla relies on a few Python 3.7 features, such as subprocess module's capture_output parameter
