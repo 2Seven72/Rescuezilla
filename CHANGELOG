@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
-  Version 2.4.3 (2023-03-05)
+  Version 2.4.2 (2023-03-05)
 -------------------------------------------------------------------------------
 
 * Removes the Intel screen tearing fix introduced for v2.3 (2021-12-24), which should fix black screens on Intel graphics (#281)
