@@ -21,8 +21,8 @@ jobs:
           fetch-depth: 0
 
       # Extract human-readable version string from the most recent CHANGELOG entry
-      - run: echo "RESCUEZILLA_RELEASE_NAME=$(git grep -h -E -o '[a-zA-Z].*' CHANGELOG | head -1)" >> $GITHUB_ENV
-      
+      - run: echo "RESCUEZILLA_RELEASE_NAME=\"$(git grep -h -E -o '[a-zA-Z].*' CHANGELOG | head -1)\"" >> $GITHUB_ENV
+
       # Get deb package version using same command from its build scripts
       - run: echo "DEB_VERSION=$(grep -m1 -oP 'Version \K[0-9]+\.[0-9]+\.[0-9]+' CHANGELOG)" >> $GITHUB_ENV
 
@@ -71,12 +71,13 @@ jobs:
             git push origin "${{env.RELEASE_TAG}}"
           fi
 
+      - run: echo "RELEASE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: Upload release assets (on tag push)
         uses: softprops/action-gh-release@v1
-        # if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
         with:
           tag_name: ${{env.RELEASE_TAG}}
-          name: ${{env.DEB_VERSION}} (${{env.RELEASE_DATE}})
+          name: Rescuezilla v${{env.DEB_VERSION}} (${{env.RELEASE_DATE}})
           files: |
             build/*SUM
             build/rescuezilla_${{env.DEB_VERSION}}-1_all.deb
