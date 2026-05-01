@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := kinetic
+.DEFAULT_GOAL := jammy
 .PHONY: all \
 focal \
 impish \
